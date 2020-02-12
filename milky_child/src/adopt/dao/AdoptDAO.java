@@ -136,4 +136,23 @@ public class AdoptDAO {
 		return result;
 	}
 
+	public int adoptionUpdate(Connection conn, String adoptNum, String adoptResult) {
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("adoptionUpdate");
+		int result = 0;
+		
+		try {
+			pstmt= conn.prepareStatement(query);
+			pstmt.setString(1, adoptResult);
+			pstmt.setString(2, adoptNum);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+
 }

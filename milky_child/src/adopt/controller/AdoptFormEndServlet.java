@@ -76,13 +76,14 @@ public class AdoptFormEndServlet extends HttpServlet {
 
 		String msg = "";
 		String loc = "";
+		
 		if(result >0) {
 			msg = "입양 신청 완료";
-			loc = "/carePet/carePetView?carePublicationNum="+adopt.getCarePublicationNum();
 		}else {
 			msg = "입양 신청 실패";
-			loc = "/carePet/carePetView?carePublicationNum="+adopt.getCarePublicationNum();
 		}
+		
+		loc = "/carePet/carePetView?carePublicationNum="+adopt.getCarePublicationNum();
 		
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);

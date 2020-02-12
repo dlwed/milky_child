@@ -53,4 +53,17 @@ public class AdoptService {
 		return result;
 	}
 
+	public int adoptionUpdate(String adoptNum, String adoptResult) {
+		Connection conn = getConnection();
+		
+		int result = new AdoptDAO().adoptionUpdate(conn,adoptNum,adoptResult);
+
+		if(result > 0)commit(conn);
+		else rollback(conn);
+		
+		close(conn);
+		
+		return result;
+	}
+
 }

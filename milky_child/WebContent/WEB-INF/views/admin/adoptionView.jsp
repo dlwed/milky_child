@@ -17,17 +17,17 @@
 	<a href="javascript:fileDownload('<%=result.getPetApplicationFile()%>');">입양 신청서</a>
 	
 	
-	<form action="">
-		<label for="yes"></label><input type="radio" id="yes" name="adoptResult" value="Y">
-		<br>
-		<label for="no"></label><input type="radio" id="no" name="adoptResult" value="N">
+	<form action="<%=request.getContextPath()%>/admin/adoptionUpdate" method="post">
+		<input type="hidden" name="adoptNum" value='<%=result.getAdoptNum()%>'>
+		<label for="yes">허가</label><input type="radio" id="yes" name="adoptResult" value="Y">
+		<label for="no">불가</label><input type="radio" id="no" name="adoptResult" value="N">
 		<br>
 		<input type="submit" value="확인">
 	</form>
 <script>
 function fileDownload(fName){
 	fName = encodeURIComponent(fName);
-	location.href = "<%=request.getContextPath()%>/admin/adoptApplicationFileDownload" 
+	location.href = "<%=request.getContextPath()%>/admin/adoptionFile" 
 				  + "?fileName=" + fName;
 };
 

@@ -13,7 +13,7 @@ import model.vo.Adopt;
 import model.vo.CarePet;
 import model.vo.Member;
 
-@WebServlet("/AdoptionViewServlet")
+@WebServlet("/admin/adoptionView")
 public class AdoptionViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
