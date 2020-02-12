@@ -8,7 +8,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import adopt.service.AdoptService;
+import carePet.service.CarePetService;
 import model.vo.Adopt;
+import model.vo.CarePet;
+import model.vo.Member;
 
 @WebServlet("/AdoptionViewServlet")
 public class AdoptionViewServlet extends HttpServlet {
@@ -22,7 +25,10 @@ public class AdoptionViewServlet extends HttpServlet {
 		String adoptNum = request.getParameter("adoptNum");
 		Adopt result = new AdoptService().getAdopt(adoptNum);
 		
+		CarePet adPet = new CarePetService().CarePetBoardView(result.getAdoptNum());
+		
 		request.setAttribute("result", result);
+		request.setAttribute("adPet", adPet);
 		request.getRequestDispatcher("/WEB-INF/views/admin/adoptionView.jsp").forward(request, response);
 	}
 

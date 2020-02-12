@@ -3,7 +3,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	List<Adopt> list = (List<Adopt>)request.getAttribute("list"); 
+	List<Adopt> list = (List<Adopt>)request.getAttribute("list");
+	
+
 %>
 
 <!DOCTYPE html>
@@ -29,6 +31,9 @@
  				</td>
  				<td>
  					<span><%=a.getCarePublicationNum()%></span>
+ 				</td>
+ 				<td>
+ 					<span><%=null == a.getAdoptResult()?"미확인":("Y"==a.getAdoptResult()?"허가":"불가")%></span>
  				</td>
  			</tr>
  <%
