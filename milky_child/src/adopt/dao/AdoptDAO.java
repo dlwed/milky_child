@@ -63,6 +63,7 @@ public class AdoptDAO {
 	public int insertAdoptApplication(Connection conn, Adopt a) {
 		PreparedStatement pstmt = null;
 		String query = prop.getProperty("insertAdoptApplication");
+		System.out.println(query);
 		int result = 0;
 		
 		try {
