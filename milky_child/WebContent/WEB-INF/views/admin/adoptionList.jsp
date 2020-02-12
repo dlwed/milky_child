@@ -20,7 +20,9 @@
 			%>
 			<tr>
  				<td>
+ 					<a href="<%=request.getContextPath()%>/admin/adoptionView?adoptNum=<%=a.getAdoptNum()%>">
  					<span><%=a.getAdoptNum()%></span>
+ 					</a>
  				</td>
  				<td>
  					<span><%=a.getMemberId()%></span>

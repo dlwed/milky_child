@@ -43,4 +43,14 @@ public class AdoptService {
 		return list;
 	}
 
+	public Adopt getAdopt(String adoptNum) {
+		Connection conn = getConnection();
+		
+		Adopt result = new AdoptDAO().getAdopt(conn, adoptNum);
+		
+		close(conn);
+		
+		return result;
+	}
+
 }

@@ -110,4 +110,30 @@ public class AdoptDAO {
 		return list;
 	}
 
+	public Adopt getAdopt(Connection conn, String adoptNum) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("getAdopt");
+		Adopt result = null;
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, adoptNum);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				result = new Adopt(rset.getString("adopt_num"), rset.getString("member_ID"), rset.getString("care_publication_num"), rset.getString("AP_Agreement_File"), rset.getString("pet_Application_File"), rset.getDate("application_Date"), rset.getDate("check_Date"), rset.getString("adopt_result"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
 }
