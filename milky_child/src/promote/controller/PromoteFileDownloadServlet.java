@@ -1,4 +1,4 @@
-package adopt.controller;
+package promote.controller;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -13,11 +13,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/adopt/adoptFileDownload")
-public class AdoptFileDownloadServlet extends HttpServlet {
+@WebServlet("/promote/promoteFileDownload")
+public class PromoteFileDownloadServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public AdoptFileDownloadServlet() {
+    public PromoteFileDownloadServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -69,7 +69,6 @@ public class AdoptFileDownloadServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("doPost@AdoptFileDownloadServlet");
 		doGet(request, response);
 	}
 

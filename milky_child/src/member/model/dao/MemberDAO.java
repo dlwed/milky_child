@@ -194,4 +194,26 @@ public MemberDAO() {
 		
 		return result;
 	}
+
+	public int promoteMember(Connection conn, String memberId, String resultGrade) {
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("promoteMember");
+		
+		int result= 0;
+		try {
+			pstmt= conn.prepareStatement(query);
+			pstmt.setString(1, resultGrade);
+			pstmt.setString(2, memberId);
+			System.out.println(query);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		
+		return result;
+	}
 }

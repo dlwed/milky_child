@@ -72,4 +72,18 @@ public class MemberService {
 		return result;
 	}
 
+	public int promoteMember(String memberId, String resultGrade) {
+		Connection conn=getConnection();
+		int result = new MemberDAO().promoteMember(conn, memberId, resultGrade);
+		
+		if(result>0) {
+			commit(conn);
+		}
+		else {
+			rollback(conn);
+		}
+		
+		return result;
+	}
+
 }

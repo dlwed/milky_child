@@ -13,26 +13,27 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/admin/adoptionFile")
-public class AdoptionFileDownloadServlet extends HttpServlet {
+@WebServlet("/admin/promoteFile")
+public class PromoteFileDownloadServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public AdoptionFileDownloadServlet() {
+    public PromoteFileDownloadServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//1.파라미터 핸들링
-		String fileName =  request.getParameter("fileName");
+		String oName = request.getParameter("oName");
+		String rName = request.getParameter("rName");
 //		System.out.println("Name="+fileName);
 		
 		//2.입출력 스트림
-		String saveDirectory = getServletContext().getRealPath("/upload/adoptApplication");
+		String saveDirectory = getServletContext().getRealPath("/upload/promoteFile");
 //		System.out.println("saveDirectory="+saveDirectory);
 		
 		//입력
-		BufferedInputStream bis = new BufferedInputStream(new FileInputStream(saveDirectory+"/"+fileName));
+		BufferedInputStream bis = new BufferedInputStream(new FileInputStream(saveDirectory+"/"+rName));
 		
 		//출력
 		ServletOutputStream sos = response.getOutputStream();
@@ -46,12 +47,12 @@ public class AdoptionFileDownloadServlet extends HttpServlet {
 		
 		if(isMSIE) {
 			//유니코드 퍼센트문자변환
-			resFileName = URLEncoder.encode(fileName,"utf-8");
+			resFileName = URLEncoder.encode(oName,"utf-8");
 			//공백 + => %20
 			resFileName = resFileName.replaceAll("\\+", "%20");
 		}else {
 			//String(utf-8) => byte[](utf=8) => String(iso-8859-1)
-			resFileName = new String(fileName.getBytes("utf-8"),"iso-8859-1");
+			resFileName = new String(oName.getBytes("utf-8"),"iso-8859-1");
 		}
 //		System.out.println("resFileName=" + resFileName);
 		

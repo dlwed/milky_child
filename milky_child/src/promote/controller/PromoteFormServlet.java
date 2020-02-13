@@ -1,4 +1,4 @@
-package adopt.controller;
+package promote.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,11 +7,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/adopt/adoptFrm")
-public class AdoptFormServlet extends HttpServlet {
+@WebServlet("/promote/promoteFrm")
+public class PromoteFormServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    public AdoptFormServlet() {
+    public PromoteFormServlet() {
         super();
 
     }
@@ -20,11 +20,11 @@ public class AdoptFormServlet extends HttpServlet {
 		String carePublicationNum = request.getParameter("carePublicationNum");
 		System.out.println(carePublicationNum);
 		request.setAttribute("carePublicationNum", carePublicationNum);
-		request.getRequestDispatcher("/WEB-INF/views/adoption/Adoption.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/promote/Promote.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("doPost@AdoptFormServlet");
+		System.out.println("doPost@promoteFormServlet");
 		doGet(request, response);
 	}
 

@@ -1,4 +1,4 @@
-package adopt.dao;
+package promote.dao;
 
 import java.io.FileNotFoundException;
 
@@ -12,16 +12,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import model.vo.Adopt;
+import model.vo.Promote;
 import static common.JDBCTemplate.*;
 
-public class AdoptDAO {
+public class PromoteDAO {
 	
 	private Properties prop = new Properties();
 
-	public AdoptDAO() {
+	public PromoteDAO() {
 
-		String fileName = AdoptDAO.class.getResource("/sql/adopt/query.properties").getPath();
+		String fileName = PromoteDAO.class.getResource("/sql/promote/query.properties").getPath();
 
 		try {
 			prop.load(new FileReader(fileName));
@@ -35,10 +35,10 @@ public class AdoptDAO {
 
 	}
 
-	public String getAdoptNum(Connection conn) {
+	public String getPromoteNum(Connection conn) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String query = prop.getProperty("getAdoptNum");
+		String query = prop.getProperty("getPromoteNum");
 		String result = null;
 		
 		try {
@@ -60,19 +60,19 @@ public class AdoptDAO {
 		return result;
 	}
 
-	public int insertAdoptApplication(Connection conn, Adopt a) {
+	public int insertPromoteApplication(Connection conn, Promote p) {
 		PreparedStatement pstmt = null;
-		String query = prop.getProperty("insertAdoptApplication");
+		String query = prop.getProperty("insertPromoteApplication");
 		System.out.println(query);
 		int result = 0;
 		
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, a.getAdoptNum());
-			pstmt.setString(2, a.getMemberId());
-			pstmt.setString(3, a.getCarePublicationNum());
-			pstmt.setString(4, a.getAPAgreementFile());
-			pstmt.setString(5, a.getPetApplicationFile());
+			pstmt.setString(1, p.getPromoteNum());
+			pstmt.setString(2, p.getMemberId());
+			pstmt.setString(3, p.getOldPromoteFile());
+			pstmt.setString(4, p.getRenamedPromoteFile());
+			pstmt.setString(5, p.getBeforeGrade());
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -85,11 +85,11 @@ public class AdoptDAO {
 		return result;
 	}
 
-	public List<Adopt> getAdoptList(Connection conn) {
+	public List<Promote> getPromoteList(Connection conn) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null; 
-		String query = prop.getProperty("getAdoptList");
-		List<Adopt> list = new ArrayList<Adopt>();
+		String query = prop.getProperty("getPromoteList");
+		List<Promote> list = new ArrayList<Promote>();
 		
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -97,7 +97,7 @@ public class AdoptDAO {
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
-				list.add(new Adopt(rset.getString("adopt_num"), rset.getString("member_ID"), rset.getString("care_publication_num"), rset.getString("AP_Agreement_File"), rset.getString("pet_Application_File"), rset.getDate("application_Date"), rset.getDate("check_Date"), rset.getString("adopt_result")));
+				list.add(new Promote(rset.getString("promote_num"), rset.getString("member_ID"), rset.getString("old_promote_File"), rset.getString("renamed_promote_File"), rset.getString("befere_grade"), rset.getDate("promote_apply_Date"), rset.getDate("check_Date"), rset.getString("result_grade")));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -110,20 +110,20 @@ public class AdoptDAO {
 		return list;
 	}
 
-	public Adopt getAdopt(Connection conn, String adoptNum) {
+	public Promote getPromote(Connection conn, String promoteNum) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String query = prop.getProperty("getAdopt");
-		Adopt result = null;
+		String query = prop.getProperty("getPromote");
+		Promote result = null;
 		
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, adoptNum);
+			pstmt.setString(1, promoteNum);
 			
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
-				result = new Adopt(rset.getString("adopt_num"), rset.getString("member_ID"), rset.getString("care_publication_num"), rset.getString("AP_Agreement_File"), rset.getString("pet_Application_File"), rset.getDate("application_Date"), rset.getDate("check_Date"), rset.getString("adopt_result"));
+				result = new Promote(rset.getString("promote_num"), rset.getString("member_ID"), rset.getString("old_promote_File"), rset.getString("renamed_promote_File"), rset.getString("befere_grade"),  rset.getDate("promote_apply_Date"), rset.getDate("check_Date"), rset.getString("result_grade"));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -136,15 +136,15 @@ public class AdoptDAO {
 		return result;
 	}
 
-	public int adoptionUpdate(Connection conn, String adoptNum, String adoptResult) {
+	public int PromotedUpdate(Connection conn, String promoteNum, String promoteResult) {
 		PreparedStatement pstmt = null;
-		String query = prop.getProperty("adoptionUpdate");
+		String query = prop.getProperty("PromotedUpdate");
 		int result = 0;
 		
 		try {
 			pstmt= conn.prepareStatement(query);
-			pstmt.setString(1, adoptResult);
-			pstmt.setString(2, adoptNum);
+			pstmt.setString(1, promoteResult);
+			pstmt.setString(2, promoteNum);
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {

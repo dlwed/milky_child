@@ -7,30 +7,34 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import adopt.service.AdoptService;
+import member.model.service.MemberService;
+import promote.service.PromoteService;
 
 @WebServlet("/admin/adoptionUpdate")
-public class AdoptionUpdateServlet extends HttpServlet {
+public class PromoteUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public AdoptionUpdateServlet() {
+    public PromoteUpdateServlet() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String adoptNum = request.getParameter("adoptNum");
-		String adoptResult = request.getParameter("adoptResult");
+		String memberId = request.getParameter("memberId");
+		String promoteNum = request.getParameter("promoteNume");
+		String resultGrade = request.getParameter("resultGrade");
+		int result = new PromoteService().promotedUpdate(promoteNum, resultGrade);
 		
-		int result = new AdoptService().adoptionUpdate(adoptNum, adoptResult);
-		
+		if(result>0) {
+			result = new MemberService().promoteMember(memberId,resultGrade);
+		}
 		String msg = "";
 		String loc = "";
 		if(result >0) {
 			msg = "업데이트 완료";
-			loc = "/admin/adoptionList;";
+			loc = "/admin/promoteList;";
 		}else {
 			msg = "업데이트 실패";
-			loc = "/admin/adoptionView?adoptNum="+adoptNum;
+			loc = "/admin/promoteView?adoptNum="+promoteNum;
 		}
 		
 		request.setAttribute("msg", msg);

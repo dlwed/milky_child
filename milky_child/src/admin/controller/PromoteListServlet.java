@@ -9,23 +9,23 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import adopt.service.AdoptService;
-import model.vo.Adopt;
+import model.vo.Promote;
+import promote.service.PromoteService;
 
 
-@WebServlet("/admin/adoptionList")
-public class AdoptionListServlet extends HttpServlet {
+@WebServlet("/admin/promoteList")
+public class PromoteListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public AdoptionListServlet() {
+    public PromoteListServlet() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<Adopt> list = new AdoptService().getAdoptList();
+		List<Promote> list = new PromoteService().getPromoteList();
 		
 		request.setAttribute("list", list);
-		request.getRequestDispatcher("/WEB-INF/views/admin/adoptionList.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/admin/promoteList.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

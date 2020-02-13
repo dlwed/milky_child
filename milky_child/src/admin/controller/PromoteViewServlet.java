@@ -7,28 +7,30 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import adopt.service.AdoptService;
 import carePet.service.CarePetService;
-import model.vo.Adopt;
+import member.model.service.MemberService;
+import member.model.vo.Member;
+import model.vo.Promote;
+import promote.service.PromoteService;
 import model.vo.CarePet;
 
 @WebServlet("/admin/adoptionView")
-public class AdoptionViewServlet extends HttpServlet {
+public class PromoteViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public AdoptionViewServlet() {
+    public PromoteViewServlet() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String adoptNum = request.getParameter("adoptNum");
-		Adopt result = new AdoptService().getAdopt(adoptNum);
+		String promoteNum = request.getParameter("promoteNum");
+		Promote result = new PromoteService().getPromote(promoteNum);
+		Member member = new MemberService().selectOne(result.getMemberId());
 		
-		CarePet adPet = new CarePetService().CarePetBoardView(result.getAdoptNum());
 		
 		request.setAttribute("result", result);
-		request.setAttribute("adPet", adPet);
-		request.getRequestDispatcher("/WEB-INF/views/admin/adoptionView.jsp").forward(request, response);
+		request.setAttribute("member", member);
+		request.getRequestDispatcher("/WEB-INF/views/admin/promoteView.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
