@@ -2,20 +2,14 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/views/common/header.jsp"%>
 <%
 	List<Adopt> list = (List<Adopt>)request.getAttribute("list");
 	
 
 %>
-
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-	<table>
+<section>
+<table>
  <% 
  	if(list != null && list.size() > 0){
  		for(Adopt a : list){
@@ -42,5 +36,5 @@
  <% }else{ %>
  <% } %>
  	</table>
-</body>
-</html>
+</section>
+<%@ include file="/WEB-INF/views/common/footer.jsp" %>

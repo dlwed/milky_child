@@ -11,7 +11,6 @@ import adopt.service.AdoptService;
 import carePet.service.CarePetService;
 import model.vo.Adopt;
 import model.vo.CarePet;
-import model.vo.Member;
 
 @WebServlet("/admin/adoptionView")
 public class AdoptionViewServlet extends HttpServlet {

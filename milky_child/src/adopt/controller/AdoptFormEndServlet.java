@@ -3,6 +3,7 @@ package adopt.controller;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 
 import javax.servlet.ServletException;
@@ -45,9 +46,17 @@ public class AdoptFormEndServlet extends HttpServlet {
 		
 		String carePublicationNum = multiReq.getParameter("carePublicationNum");
 		String memberId = multiReq.getParameter("memberId");
+		String APAgreement = multiReq.getFilesystemName("APAgreement1");;
 		
-		String APAgreement = multiReq.getFilesystemName("APAgreement");
-		String petApplication = multiReq.getFilesystemName("petApplication");
+		int APA = 2;
+		
+		while(null != multiReq.getFilesystemName("APAgreement" + APA)) {
+			APAgreement += ","+multiReq.getFilesystemName("APAgreement" + APA);
+			System.out.println(APA);
+			APA++;
+		}
+		
+		String[] list = APAgreement.split(",");
 		
 		String adoptNum = adoptService.getAdoptNum();
 		
@@ -69,21 +78,26 @@ public class AdoptFormEndServlet extends HttpServlet {
 			}
 		}
 		System.out.println(adoptNum);
+		System.out.println(APAgreement);
+		System.out.println(Arrays.deepToString(list));
 		
-		Adopt adopt =  new Adopt(adoptNum, memberId, carePublicationNum, APAgreement, petApplication, null, null, null);
 		
-		int result = adoptService.insertAdoptApplication(adopt);
-
 		String msg = "";
 		String loc = "";
 		
-		if(result >0) {
-			msg = "입양 신청 완료";
-		}else {
-			msg = "입양 신청 실패";
-		}
+//		Adopt adopt =  new Adopt(adoptNum, memberId, carePublicationNum, APAgreement, petApplication, null, null, null);
+//		
+//		int result = adoptService.insertAdoptApplication(adopt);
+//
+//		
+//		if(result >0) {
+//			msg = "입양 신청 완료";
+//		}else {
+//			msg = "입양 신청 실패";
+//		}
 		
-		loc = "/carePet/carePetView?carePublicationNum="+adopt.getCarePublicationNum();
+		msg = "테스트"; 
+		loc = "/carePet/carePetView?carePublicationNum="+carePublicationNum;
 		
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);

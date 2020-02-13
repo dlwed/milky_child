@@ -2,7 +2,7 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/views/common/header.jsp" %>
+<%@ include file="/WEB-INF/views/common/header.jsp"%>
 <%
 	List<Partner> list = (List<Partner>)request.getAttribute("list");
 %>
@@ -11,6 +11,7 @@
 	width: 100px;
 }
 </style>
+<section>
  	<table>
  <% 
  	if(list != null && list.size() > 0){
@@ -49,4 +50,5 @@
  <% }else{ %>
  <% } %>
  	</table>
+</section>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

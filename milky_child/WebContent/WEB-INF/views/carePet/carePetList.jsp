@@ -2,20 +2,27 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<style>
-</style>
-</head>
-<body>
- 	<h1>보호동물 리스트</h1>
+<%@ include file="/WEB-INF/views/common/header.jsp"%>
 <%
 	List<CarePet> list = (List<CarePet>)request.getAttribute("list");
 %>
- 	<table>
+
+<style>
+.pjm-section-Wrapper{
+	background-color: white;
+	text-align: center;
+	padding: 50px 0;
+}
+
+#pjm-partner-table{
+	width: 900px;
+	margin: 0 auto;
+}
+</style>
+
+<section class="pjm-section-Wrapper" >
+	<article id="pjm-partner-table">
+ 	<table>	
  <% 
  	if(list != null && list.size() > 0){
  		for(int i = 0 ; i<list.size();){
@@ -31,13 +38,24 @@
  					</div>
  					</a>
  				</td>
- 				<%				
+ 				<%
  			}
 			%></tr><%
  		}
  %>
  <% }else{ %>
+ 	<tr><th><h1>요첯하신 부분을 찾을 수 없습니다.</h1></th></tr>
  <% } %>
+ 
+ 	
  	</table>
-</body>
-</html>
+ 	</article>
+ </section>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+<%@ include file="/WEB-INF/views/common/footer.jsp" %>
