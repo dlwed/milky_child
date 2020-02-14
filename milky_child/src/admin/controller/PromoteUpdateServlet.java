@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import member.model.service.MemberService;
 import promote.service.PromoteService;
 
-@WebServlet("/admin/adoptionUpdate")
+@WebServlet("/admin/promoteUpdate")
 public class PromoteUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -20,12 +20,15 @@ public class PromoteUpdateServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String memberId = request.getParameter("memberId");
-		String promoteNum = request.getParameter("promoteNume");
+		String promoteNum = request.getParameter("promoteNum");
 		String resultGrade = request.getParameter("resultGrade");
+		System.out.println(memberId+promoteNum+resultGrade);
 		int result = new PromoteService().promotedUpdate(promoteNum, resultGrade);
+			System.out.println("result@promoteupdate"+result);
 		
 		if(result>0) {
 			result = new MemberService().promoteMember(memberId,resultGrade);
+			System.out.println("result@promoteMember"+result);
 		}
 		String msg = "";
 		String loc = "";
@@ -34,7 +37,7 @@ public class PromoteUpdateServlet extends HttpServlet {
 			loc = "/admin/promoteList;";
 		}else {
 			msg = "업데이트 실패";
-			loc = "/admin/promoteView?adoptNum="+promoteNum;
+			loc = "/admin/promoteView?promoteNum="+promoteNum;
 		}
 		
 		request.setAttribute("msg", msg);

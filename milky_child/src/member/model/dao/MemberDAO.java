@@ -34,6 +34,7 @@ public MemberDAO() {
 		PreparedStatement pstmt= null;
 		ResultSet rset = null;
 		String query = prop.getProperty("selectOne");
+		System.out.println(query);
 		try {
 			pstmt= conn.prepareStatement(query);
 			pstmt.setString(1, memberId);

@@ -46,9 +46,10 @@ public class PromoteFormEndServlet extends HttpServlet {
 		MultipartRequest multiReq = new MultipartRequest(request, saveDirectory, maxPostSize, encoding, fileRenamePolicy);
 		
 		String memberId = multiReq.getParameter("memberId");
+		System.out.println("memberId"+memberId);
 		String oldPromoteFile = multiReq.getOriginalFileName("promoteFile1");
 		String renamedPromoteFile = multiReq.getFilesystemName("promoteFile1");
-		String before_grade = new MemberService().selectOne(memberId).getGrade(); 
+		String before_grade = new MemberService().selectOne(memberId).getGrade();
 		int APA = 2;
 		
 		while(null != multiReq.getFilesystemName("promoteFile" + APA)) {
@@ -58,7 +59,7 @@ public class PromoteFormEndServlet extends HttpServlet {
 			APA++;
 		}
 		
-		String[] list = renamedPromoteFile.split(",");
+//		String[] list = renamedPromoteFile.split(",");
 		
 		String promoteNum = promoteService.getPromoteNum();
 		
@@ -82,7 +83,7 @@ public class PromoteFormEndServlet extends HttpServlet {
 		System.out.println(promoteNum);
 		System.out.println(oldPromoteFile);
 		System.out.println(renamedPromoteFile);
-		System.out.println(Arrays.deepToString(list));
+//		System.out.println(Arrays.deepToString(list));
 		
 		
 		String msg = "";
@@ -99,7 +100,7 @@ public class PromoteFormEndServlet extends HttpServlet {
 			msg = "승급 신청 실패";
 		}
 		
-		loc = "index.jsp";
+		loc = "/index.jsp";
 		
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);

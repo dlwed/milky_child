@@ -8,9 +8,13 @@
 <%
 	Promote result = (Promote)request.getAttribute("result");
 	Member member = (Member)request.getAttribute("member");
-	String[] oldFileNameList = result.getOldPromoteFile().split(",");
-	String[] renamedFileNameList = result.getRenamedPromoteFile().split(",");
+	String[] oldFileNameList = null;
+	String[] renamedFileNameList = null;
 	
+	if(null!=result.getOldPromoteFile()){
+		oldFileNameList = result.getOldPromoteFile().split(",");
+		renamedFileNameList = result.getRenamedPromoteFile().split(",");
+	}
 %>
 <style>
 .pjm-section-Wrapper{

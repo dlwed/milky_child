@@ -97,7 +97,7 @@ public class PromoteDAO {
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
-				list.add(new Promote(rset.getString("promote_num"), rset.getString("member_ID"), rset.getString("old_promote_File"), rset.getString("renamed_promote_File"), rset.getString("befere_grade"), rset.getDate("promote_apply_Date"), rset.getDate("check_Date"), rset.getString("result_grade")));
+				list.add(new Promote(rset.getString("promote_num"), rset.getString("member_ID"), rset.getString("Old_Promote_File"), rset.getString("Renamed_Promote_File"), rset.getString("Before_Grade"), rset.getDate("promote_apply_Date"), rset.getDate("check_Date"), rset.getString("result_grade")));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -123,7 +123,7 @@ public class PromoteDAO {
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
-				result = new Promote(rset.getString("promote_num"), rset.getString("member_ID"), rset.getString("old_promote_File"), rset.getString("renamed_promote_File"), rset.getString("befere_grade"),  rset.getDate("promote_apply_Date"), rset.getDate("check_Date"), rset.getString("result_grade"));
+				result = new Promote(rset.getString("promote_num"), rset.getString("member_ID"), rset.getString("old_promote_File"), rset.getString("renamed_promote_File"), rset.getString("Before_Grade"),  rset.getDate("promote_apply_Date"), rset.getDate("check_Date"), rset.getString("result_grade"));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -140,6 +140,7 @@ public class PromoteDAO {
 		PreparedStatement pstmt = null;
 		String query = prop.getProperty("PromotedUpdate");
 		int result = 0;
+		System.out.println(query);
 		
 		try {
 			pstmt= conn.prepareStatement(query);

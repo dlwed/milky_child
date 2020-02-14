@@ -22,7 +22,7 @@
 	
 
 	<form action="<%=request.getContextPath()%>/promote/promoteFrmEnd" method="post" enctype="multipart/form-data">
-		<input type="hidden" name="memberId" value="<%=memberId%>">
+		<input type="hidden" name="memberId" value="<%=memberLoggedIn.getMemberId()%>">
 		<label for="promoteFile1">첨부자료</label><input type="file" name="promoteFile1">
 		<br>
 		<input type="submit" value="승급 신청">

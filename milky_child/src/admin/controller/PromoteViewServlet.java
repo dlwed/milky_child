@@ -14,7 +14,7 @@ import model.vo.Promote;
 import promote.service.PromoteService;
 import model.vo.CarePet;
 
-@WebServlet("/admin/adoptionView")
+@WebServlet("/admin/promoteView")
 public class PromoteViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -25,6 +25,7 @@ public class PromoteViewServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String promoteNum = request.getParameter("promoteNum");
 		Promote result = new PromoteService().getPromote(promoteNum);
+		System.out.println(result);
 		Member member = new MemberService().selectOne(result.getMemberId());
 		
 		
